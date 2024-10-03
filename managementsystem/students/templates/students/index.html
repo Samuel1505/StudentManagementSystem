@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body
+    style="
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 50px;
+    "
+  >
+    <h1>Students Information </h1>
+    <a href="{% url 'create' %}">Add New Student</a>
+    <table width="1200" border="1">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date Of Birth</th>
+        <th>Gender</th>
+        <th>Matric No</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+
+      {% if object_list|length <= 0 %}
+      <tr>
+        <td colspan="8" align="center" style="margin: 10px ;">No student has been registered</td>
+      </tr>
+      {% endif %} {% for student in object_list %}
+      <tr>
+        <td>{{ student.first_name }}</td>
+        <td>{{ student.last_name }}</td>
+        <td>{{ student.date_of_birth }}</td>
+        <td>{{ student.gender }}</td>
+        <td>{{ student.mat_number }}</td>
+        <td>{{ student.phone_number }}</td>
+        <td>{{ student.email }}</td>
+        <td>
+          <a href="{% url 'update' student.pk %}" style="margin-right: 10px"
+            >Edit</a
+          ><a href="{% url 'delete' student.pk %}">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
